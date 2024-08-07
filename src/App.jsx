@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Full from './Full';
+import Nav from './Nav';
+import Footer from './Footer';
 
 export default function App() {
   const [products, setProducts] = useState([]);
@@ -16,10 +18,6 @@ export default function App() {
       });
   };
 
-  useEffect(() => {
-    loadData();
-  }, []);
-
   const handleProductClick = (product) => {
     setSelectedProduct(product);
   };
@@ -29,7 +27,9 @@ export default function App() {
   };
 
   return (
-    <div className="container">
+    <>
+      <Nav />
+        <div className="container">
       <h1 className="my-4 text-center">Product Records</h1>
       {selectedProduct ? (
         <Full product={selectedProduct} onClose={handleClose} />
@@ -76,5 +76,7 @@ export default function App() {
         </>
       )}
     </div>
+    <Footer />
+    </>
   );
 }
