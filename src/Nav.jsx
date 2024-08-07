@@ -4,9 +4,9 @@ export default function Nav() {
   return (
     <nav className="navbar navbar-dark bg-dark">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
-          Plifkart
-        </a>
+        <h1 className="text-bold text-white">
+          PlifKart
+        </h1>
         <form className="d-flex" role="search">
           <input
             className="form-control me-2"
