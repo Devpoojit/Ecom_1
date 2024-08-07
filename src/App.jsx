@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Nav from './Nav';
 
 export default function App() {
   const [products, setProducts] = useState([]);
@@ -33,6 +34,8 @@ export default function App() {
   }
 
   return (
+    <>
+    <Nav />
     <div className="container">
       <h1 className="my-4 text-center">Product Records</h1>
       <div className="d-flex justify-content-center mb-4">
@@ -55,7 +58,7 @@ export default function App() {
       <div className="row">
         {products.map((product, index) => (
           <div key={index} className="col-6 col-md-4 col-lg-3 mb-4">
-            <div className="card h-100">
+            <div className="card h-100  ">
               <img
                 src={product.thumbnail}
                 className="card-img-top"
@@ -71,5 +74,6 @@ export default function App() {
         ))}
       </div>
     </div>
+    </>
   );
 }
