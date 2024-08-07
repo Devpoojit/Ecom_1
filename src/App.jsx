@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Nav from './Nav';
+import Footer from './Footer';
 
 export default function App() {
   const [products, setProducts] = useState([]);
@@ -74,6 +75,7 @@ export default function App() {
         ))}
       </div>
     </div>
+    <Footer />
     </>
   );
 }
