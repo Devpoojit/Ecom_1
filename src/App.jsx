@@ -49,11 +49,12 @@ export default function App() {
           onChange={(e) => filterData(e.target.value)}
           style={{ width: '200px' }}
         >
-          <option value="">Choose Category</option>
+          <option value="" disabled>Choose Category</option>
           <option value="beauty">Beauty</option>
           <option value="fragrances">Fragrances</option>
           <option value="furniture">Furniture</option>
           <option value="groceries">Groceries</option>
+          <option value="">All</option>
         </select>
       </div>
       <div className="row">
