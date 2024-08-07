@@ -59,12 +59,12 @@ export default function App() {
       <div className="row">
         {products.map((product, index) => (
           <div key={index} className="col-6 col-md-4 col-lg-3 mb-4">
-            <div className="card h-100  ">
+            <div className="card h-100 custom-grab" style={{cursor: 'grab'}} >
               <img
                 src={product.thumbnail}
                 className="card-img-top"
                 alt={product.title}
-                style={{ objectFit: 'cover', height: '150px' }}
+                style={{ objectFit: 'cover', height: '150px'}}
               />
               <div className="card-body">
                 <h5 className="card-title">{product.title}</h5>
