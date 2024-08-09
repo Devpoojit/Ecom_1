@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import Full from './Full';
 import Nav from './Nav';
 import Footer from './Footer';
@@ -59,12 +59,8 @@ export default function App() {
   // Handle page change
   const handlePageClick = (pageNumber) => {
     setCurrentPage(pageNumber);
+    loadData(); // Load data when a page is clicked
   };
-
-  // Reload data when limit or page changes
-  useEffect(() => {
-    loadData();
-  }, [limit, currentPage]);
 
   // Render the UI
   return (
@@ -84,6 +80,7 @@ export default function App() {
                 className="form-control"
                 style={{ width: '200px' }}
                 onChange={handleCategoryChange}
+                disabled={products.length === 0} // Disable until products are loaded
               >
                 <option selected value="">Choose Category</option>
                 <option value="beauty">Beauty</option>
@@ -94,7 +91,7 @@ export default function App() {
             </div>
 
             <div className="d-flex justify-content-center mb-4">
-              <select ref={limitBox} style={{ width: '60px' }} onChange={handleLimitChange} value={limit}>
+              <select ref={limitBox} style={{ width: '60px' }} onChange={handleLimitChange} value={limit} disabled={products.length === 0}>
                 <option value={10}>10</option>
                 <option value={15}>15</option>
                 <option value={25}>25</option>
@@ -104,27 +101,31 @@ export default function App() {
               <span className="ml-1">Products per page</span>
             </div>
 
-            <div className='d-flex justify-content-center mb-4'>
-              <span className="text-center">Total Products: {totalProducts}</span>
-            </div>
+            {products.length > 0 && (
+              <>
+                <div className='d-flex justify-content-center mb-4'>
+                  <span className="text-center">Total Products: {totalProducts}</span>
+                </div>
 
-            {/** Pagination */}
-            <div className="btn-toolbar justify-content-center mb-4" role="toolbar" aria-label="Toolbar with button groups">
-              <div className="btn-group me-2" role="group" aria-label="First group">
-                {
-                  Array.from({ length: totalPages }, (_, i) => (
-                    <button
-                      type="button"
-                      className={`btn btn-primary `}
-                      key={i}
-                      onClick={() => handlePageClick(i + 1)}
-                    >
-                      {i + 1}
-                    </button>
-                  ))
-                }
-              </div>
-            </div>
+                {/** Pagination */}
+                <div className="btn-toolbar justify-content-center mb-4" role="toolbar" aria-label="Toolbar with button groups">
+                  <div className="btn-group me-2" role="group" aria-label="First group">
+                    {
+                      Array.from({ length: totalPages }, (_, i) => (
+                        <button
+                          type="button"
+                          className={`btn btn-primary`}
+                          key={i}
+                          onClick={() => handlePageClick(i + 1)}
+                        >
+                          {i + 1}
+                        </button>
+                      ))
+                    }
+                  </div>
+                </div>
+              </>
+            )}
 
             <div className="row">
               {filteredProducts.map((product, index) => (
