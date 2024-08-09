@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Full from './Full';
 import Nav from './Nav';
 import Footer from './Footer';
@@ -60,6 +60,27 @@ export default function App() {
   const handlePageClick = (pageNumber) => {
     setCurrentPage(pageNumber);
     loadData(); // Load data when a page is clicked
+  };
+
+  // Render star ratings
+  const renderStars = (rating) => {
+    const fullStars = Math.floor(rating);
+    const halfStar = rating % 1 !== 0 ? 1 : 0;
+    const emptyStars = 5 - fullStars - halfStar;
+
+    return (
+      <>
+        {Array(fullStars).fill().map((_, i) => (
+          <i key={`full-${i}`} className="fa fa-star text-warning"></i>
+        ))}
+        {halfStar === 1 && (
+          <i key="half" className="fa fa-star-half-alt text-warning"></i>
+        )}
+        {Array(emptyStars).fill().map((_, i) => (
+          <i key={`empty-${i}`} className="fa fa-star-o text-warning"></i>
+        ))}
+      </>
+    );
   };
 
   // Render the UI
@@ -144,6 +165,10 @@ export default function App() {
                     <div className="card-body">
                       <h5 className="card-title">{product.title}</h5>
                       <p className="card-text">Price: ₹{product.price}</p>
+                      <div className="d-flex align-items-center">
+                        {renderStars(product.rating)} 
+                        <span className="ml-2">({product.rating})</span>
+                      </div>
                     </div>
                   </div>
                 </div>
