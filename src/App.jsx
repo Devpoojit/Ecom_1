@@ -13,6 +13,32 @@ export default function App() {
   const [limit, setLimit] = useState(10);
   const [totalPages, setTotalPages] = useState(0);
 
+  // Initialize Owl Carousel
+  useEffect(() => {
+    if (window.jQuery) {
+      window.jQuery('.owl-carousel').owlCarousel({
+        autoplay: true,
+        smartSpeed: 1000,
+        margin: 24,
+        dots: false,
+        loop: true,
+        nav: true,
+        navText: [
+          '<i class="bi bi-arrow-left"></i>',
+          '<i class="bi bi-arrow-right"></i>',
+        ],
+        responsive: {
+          0: {
+            items: 1,
+          },
+          992: {
+            items: 2,
+          },
+        },
+      });
+    }
+  }, []);
+
   // Load data from the API
   const loadData = () => {
     fetch(`https://dummyjson.com/products?limit=${limit}&skip=${(currentPage - 1) * limit}`)
@@ -87,6 +113,30 @@ export default function App() {
   return (
     <>
       <Nav />
+      
+      {/* Carousel Section */}
+      <div className="container-xxl py-5">
+            <div className="container">
+                <div className="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+                    <div className="testimonial-item bg-light rounded p-5">
+                        <div className="d-flex align-items-center bg-white me-n5">
+                            <img className="img-fluid flex-shrink-0 rounded-circle" src="https://cdn.dummyjson.com/products/images/groceries/Ice%20Cream/1.png" style={{height:'90px' , width:'90px'}} alt="Ice Cream"/>
+                        </div>
+                    </div>
+                    <div className="testimonial-item bg-light rounded p-5">
+                        <div className="d-flex align-items-center bg-white me-n5" >
+                            <img className="img-fluid flex-shrink-0 rounded-circle" src="https://cdn.dummyjson.com/products/images/groceries/Honey%20Jar/1.png" style={{height:'90px' , width:'90px'}} alt="Honey Jar"/>
+                        </div>
+                    </div>
+                    <div className="testimonial-item bg-light rounded p-5">
+                        <div className="d-flex align-items-center bg-white me-n5">
+                            <img className="img-fluid flex-shrink-0 rounded-circle" src= "https://cdn.dummyjson.com/products/images/groceries/Green%20Chili%20Pepper/1.png" style={{height:'90px' , width:'90px'}} alt="Green Chili Pepper"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
       <div className="container">
         <h1 className="my-4 text-center">Product Records</h1>
         {selectedProduct ? (
@@ -115,7 +165,7 @@ export default function App() {
               <select ref={limitBox} style={{ width: '60px' }} onChange={handleLimitChange} value={limit} disabled={products.length === 0}>
                 <option value={10}>10</option>
                 <option value={15}>15</option>
-                <option value={25}>25</option>
+                <option value={25}>25}</option>
                 <option value={30}>30</option>
                 <option value={50}>50</option>
               </select>
